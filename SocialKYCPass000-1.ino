@@ -42,7 +42,7 @@ void loop(void) {
 
     Serial.println("Sector Block   0  1  2  3   4  5  6  7   8  9 10 11  12 13 14 15  AccessBits");
 
-    for (uint16_t blockNumber = 0; blockNumber < 64; blockNumber++) {
+    for (uint16_t blockNumber = 0; blockNumber < 512; blockNumber++) { // 512 blocks for 8K card
       // Authenticate and read data
       success = nfc.mifareclassic_AuthenticateBlock(uid, uidLength, blockNumber, 0, key_a);
 
@@ -80,6 +80,6 @@ void loop(void) {
         Serial.print("Failed to authenticate block "); Serial.println(blockNumber);
       }
     }
-    delay(10000); // 10 seconds delay to prevent continuous reading
+    delay(100000); // 10 seconds delay to prevent continuous reading
   }
 }
